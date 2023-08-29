@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .main{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        .from{
+            height: 400px;
+            width: 300px;
+            background-color: rgb(247, 252, 178);
+            text-align: center;
+            padding-top: 20px;
+        }
+
+        .container{
+            width: 1000px;
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        .to{
+            /* margin-top: 25px; */
+            height: 400px;
+            width: 300px;
+            background-color: rgb(170, 234, 245);
+            text-align: center;
+            padding-top: 20px;
+            
+        }
+
+        .from .elements{
+            background-color: red;
+            margin: 25px;
+        }
+
+        .to .elements{
+            background-color: rgb(53, 245, 14);
+            margin: 25px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main">
+        
+
+    
+
+    <div class="container">
+
+    
+
+    <div class="from">
+
+        <div class="elements" draggable="true">Complete JavaScript 798 By Today</div>
+        <div class="elements" draggable="true">Complete JavaScript 123 By Today</div>
+        <div class="elements" draggable="true">Complete JavaScript 890 By Today</div>
+
+    </div>
+    <div class="to"></div>
+
+</div>
+</div>
+<div class="inputItems">
+    <input type="text" name="" id="description">
+    <button onclick="runThis()">Click here</button>
+
+</div>
+</body>
+<script>
+    let from = document.querySelector('.from')
+    let to = document.querySelector('.to')
+    let elementsArr = document.querySelectorAll('.elements')
+
+    for(ele of elementsArr){
+        ele.addEventListener('dragstart',function(e){
+            let selectedElement = e.target;
+
+            to.addEventListener('dragover',function(e){
+                e.preventDefault();
+            })
+
+            to.addEventListener('drop',function(e){
+                to.appendChild(selectedElement)
+                selectedElement = null;
+            })
+
+            from.addEventListener('dragover',function(e){
+                e.preventDefault();
+            })
+
+            from.addEventListener('drop',function(e){
+                from.appendChild(selectedElement)
+                selectedElement = null;
+            })
+
+            
+
+            
+        })
+    }
+</script>
+</html>
