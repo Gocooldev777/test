@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://kit.fontawesome.com/682d6ee6fc.js" crossorigin="anonymous"></script>
+    <style>
+        .main{
+            
+            display: flex;
+            
+            justify-content: center;
+            height: 70vh;
+            align-items: center;
+        }
+        .fgh{
+            display: flex;
+            justify-content: center;
+        }
+        .main .container{
+            height: 400px;
+            width: 1000px;
+            background-color: bisque;
+            display: flex;
+            justify-content: space-evenly;
+            padding-top: 25px;
+            
+        }
+        .main>.container>.from{
+            
+            height: 300px;
+            width:200px;
+            background-color: white;
+            border: 1px dashed black;
+            overflow: scroll;
+            
+
+
+        }
+        .main .container .to{
+            height: 300px;
+            width:200px;
+            /* background-color: rgb(207, 25, 25); */
+            border: 1px dashed black;
+
+        }
+
+        .main .container .from .list{
+            display: flex;
+            justify-content: center;
+            margin: 10px;
+            height: 25px;
+            background-color: rgb(244, 25, 51);
+            
+            
+        
+        }
+
+        .main .container .from .list .icon{
+            flex: 1;
+            margin-top: 3px;
+            margin-left: 5px;
+            
+        }
+        .main .container .from .list .text{
+            flex: 4;
+            margin-top: -10px;
+            font-size: 12px;
+
+        }
+
+        .main .container .to .list{
+            display: flex;
+            justify-content: center;
+            margin: 10px;
+            height: 25px;
+            background-color: rgb(17, 239, 58);
+            
+        }
+
+        .main .container .to .list .icon{
+            flex: 1;
+            margin-top: 3px;
+            margin-left: 5px;
+            
+        }
+        .main .container .to .list .text{
+            flex: 4;
+            margin-top: -10px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="container">
+            
+            <div class="from">
+                
+            </div>
+            
+            <div class="to"></div>
+        </div>
+        
+    </div>
+    <div class="fgh">
+
+        <input type="text" name="" id="thisFiller">
+                <button onclick="ref()">Add Task</button>
+    </div>
+</body>
+
+<script>
+   
+
+    function ref(){
+        let contentAdd = document.getElementById('thisFiller').value
+        let ref = document.createElement('div')
+        ref.className = 'list'
+        ref.setAttribute('draggable',"true")
+        ref.innerHTML = '<div class="icon"><i class="fa-solid fa-circle-xmark"></i></div><div class="text"><h3>'+contentAdd+'</h3></div><br>'
+        document.querySelector('.from').appendChild(ref)
+        drag()
+    }
+
+    function drag(){
+    console.log('HELLO THISIS DRAG')
+    
+    let listArray = document.getElementsByClassName('list')
+    let from = document.querySelector('.from')
+    let to = document.querySelector('.to')
+
+    console.log(document.getElementsByClassName('list'))
+        console.log(listArray,'ihjuh')
+    for(li of listArray){
+        li.addEventListener("dragstart",function(e){
+            let clicked = e.target;
+
+            to.addEventListener("dragover", function(e){
+                e.preventDefault();
+            })
+
+            to.addEventListener("drop", function(e){
+                to.appendChild(clicked)
+                clicked= null;
+                document.querySelector('.to .list .icon i').classList.value = 'fa-solid fa-check'
+                let toLists = document.querySelectorAll('.to .list .icon i')
+                for(k of toLists){
+                    k.classList.value = 'fa-solid fa-check'
+                }
+                
+            })
+
+            from.addEventListener("dragover", function(e){
+                e.preventDefault();
+            })
+
+            from.addEventListener("drop", function(e){
+                from.appendChild(clicked)
+                clicked= null;
+                document.querySelector('.from .list .icon i').classList.value = 'fa-solid fa-check'
+                let toLists = document.querySelectorAll('.from .list .icon i')
+                for(k of toLists){
+                    k.classList.value = 'fa-solid fa-circle-xmark'
+                }
+                
+            })
+        })
+
+        
+        }
+
+        
+    }
+
+</script>
+</html>
